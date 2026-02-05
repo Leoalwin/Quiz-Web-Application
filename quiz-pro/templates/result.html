@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card text-center shadow-lg p-5">
+
+    <h2 class="text-success mb-4">
+        🎉 Quiz Completed!
+    </h2>
+
+    <h3>Your Score</h3>
+
+    <div class="display-4 fw-bold text-primary my-3">
+        {{ score }}/5
+    </div>
+
+    <a href="/" class="btn btn-success px-4">
+        Go Home
+    </a>
+
+</div>
+
+{% endblock %}

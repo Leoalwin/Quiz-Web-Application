@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="text-center mb-5">
+    <h2 class="fw-bold text-primary">Choose a Topic</h2>
+</div>
+
+<div class="row">
+    {% for topic in topics %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm text-center p-4">
+            <h5 class="mb-3">{{ topic[1] }}</h5>
+            <a href="/quiz/{{ topic[0] }}" class="btn btn-outline-primary">
+                Start Quiz
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

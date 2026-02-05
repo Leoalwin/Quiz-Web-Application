@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-lg p-4">
+    <h4 class="mb-3 text-primary">
+    Question {{ index + 1 }} / {{ total }}
+    </h4>
+
+    <form method="POST">
+        <p class="fw-semibold">{{ question[2] }}</p>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="answer" value="1">
+            <label class="form-check-label">{{ question[3] }}</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="answer" value="2">
+            <label class="form-check-label">{{ question[4] }}</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="answer" value="3">
+            <label class="form-check-label">{{ question[5] }}</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="answer" value="4">
+            <label class="form-check-label">{{ question[6] }}</label>
+        </div>
+
+        <input type="hidden" name="index" value="{{ index }}">
+        <input type="hidden" name="score" value="{{ score }}">
+
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary px-4">
+                Next →
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+

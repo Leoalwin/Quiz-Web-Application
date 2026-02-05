@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text text-primary mb-4">Add Question</h2>
+
+<form method="POST">
+
+    <div>
+    <label>Select Topic</label><br>
+    <select name="topic_id" required>
+        <option value="">-- Select Topic --</option>
+        {% for topic in topics %}
+            <option value="{{ topic[0] }}">
+                {{ topic[1] }}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+    <p>
+    <div>
+        <label>Question</label><br>
+        <textarea name="question" required></textarea>
+    </div>
+    </p>
+
+    <div>
+        <label>Option 1</label><br>
+        <input type="text" name="option1" required>
+    </div>
+
+    <div>
+        <label>Option 2</label><br>
+        <input type="text" name="option2" required>
+    </div>
+
+    <div>
+        <label>Option 3</label><br>
+        <input type="text" name="option3" required>
+    </div>
+
+    <div>
+        <label>Option 4</label><br>
+        <input type="text" name="option4" required>
+    </div>
+
+    <br>
+
+    <div>
+        <label>Correct Option (1-4)</label><br>
+        <input type="number" name="correct_option" min="1" max="4" required>
+    </div>
+
+    <br>
+
+    <button type="submit">Save Question</button>
+
+</form>
+
+{% endblock %}
