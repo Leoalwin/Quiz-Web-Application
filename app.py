@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS questions (
     option2 TEXT NOT NULL,
     option3 TEXT NOT NULL,
     option4 TEXT NOT NULL,
-    answer TEXT NOT NULL
+    correct_option INT NOT NULL
 );
 """)
 
