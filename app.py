@@ -6,6 +6,30 @@ app = Flask(__name__)
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 conn = psycopg2.connect(DATABASE_URL)
+cur = conn.cursor()
+
+cur.execute("""
+CREATE TABLE IF NOT EXISTS topics (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+""")
+
+cur.execute("""
+CREATE TABLE IF NOT EXISTS questions (
+    id SERIAL PRIMARY KEY,
+    topic_id INTEGER REFERENCES topics(id),
+    question TEXT NOT NULL,
+    option1 TEXT NOT NULL,
+    option2 TEXT NOT NULL,
+    option3 TEXT NOT NULL,
+    option4 TEXT NOT NULL,
+    answer TEXT NOT NULL
+);
+""")
+
+conn.commit()
+cur.close()
 
 
 
