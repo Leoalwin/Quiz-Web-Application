@@ -28,6 +28,20 @@ CREATE TABLE IF NOT EXISTS questions (
 );
 """)
 
+cur.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(100),
+    password VARCHAR(100)
+);
+""")
+
+cur.execute("""
+INSERT INTO users (username, password)
+VALUES (%s, %s)
+ON CONFLICT DO NOTHING;
+""", ("admin", "admin123"))
+
 conn.commit()
 cur.close()
 
