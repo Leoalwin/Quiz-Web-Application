@@ -1,12 +1,51 @@
+
+
 from flask import Flask, render_template, request,redirect,url_for
 import psycopg2
 import os
 
-
 app = Flask(__name__)
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+conn = psycopg2.connect(DATABASE_URL)
+cur = conn.cursor()
+
+cur.execute("""
+CREATE TABLE IF NOT EXISTS topics (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+""")
+
+cur.execute("""
+CREATE TABLE IF NOT EXISTS questions (
+    id SERIAL PRIMARY KEY,
+    topic_id INTEGER REFERENCES topics(id),
+    question TEXT NOT NULL,
+    option1 TEXT NOT NULL,
+    option2 TEXT NOT NULL,
+    option3 TEXT NOT NULL,
+    option4 TEXT NOT NULL,
+    correct_option INT NOT NULL
+);
+""")
+
+cur.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(100),
+    password VARCHAR(100)
+);
+""")
+
+cur.execute("""
+INSERT INTO users (username, password)
+VALUES (%s, %s)
+ON CONFLICT DO NOTHING;
+""", ("admin", "admin123"))
+
+conn.commit()
+cur.close()
 
 
 
@@ -112,5 +151,5 @@ def quiz_post(topic_id):
     return render_template("quiz.html",question=question,topic_id=topic_id,index=index,score=score,total = total)
 
 if __name__ == "__main__":
-    app.run(debug=True)     
-
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
